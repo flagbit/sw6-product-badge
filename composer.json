@@ -1,7 +1,6 @@
 {
     "name": "flagbit/shopware-6-product-badge",
     "description": "A badge for the navigation and the product detail page",
-    "version": "1.0.0",
     "type": "shopware-platform-plugin",
     "license": "proprietary",
     "authors": [
