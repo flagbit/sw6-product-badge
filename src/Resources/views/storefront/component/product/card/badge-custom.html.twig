@@ -1,5 +1,5 @@
 <div>
-    <span class="badge badge-custom"
+    <span class="badge badge-custom {% if not config('SschreierProductBadge.config.customBadgeColorViaConfig') %}badge-light text-primary{% endif %}"
         {% if config('SschreierProductBadge.config.customBadgeColorViaConfig') %}{% if config('SschreierProductBadge.config.customBadgeBackgroundColor') or config('SschreierProductBadge.config.customBadgeFontColor') %}style="{% if config('SschreierProductBadge.config.customBadgeBackgroundColor') %}background-color: {{ config('SschreierProductBadge.config.customBadgeBackgroundColor') }};{% endif %}{% if config('SschreierProductBadge.config.customBadgeFontColor') %}color: {{ config('SschreierProductBadge.config.customBadgeFontColor') }};{% endif %}"{% endif %}
     {% else %}{% if customFields[customBadgeBackgroundColorValue] or customFields[customBadgeFontColorValue] %}style="{% if customFields[customBadgeBackgroundColorValue] %}background-color: {{ customFields[customBadgeBackgroundColorValue] }};{% endif %} {% if customFields[customBadgeFontColorValue] %}color: {{ customFields[customBadgeFontColorValue] }};{% endif %}"{% endif %}{% endif %}>
         {% block page_product_detail_buy_container_inner_custom_badge %}
