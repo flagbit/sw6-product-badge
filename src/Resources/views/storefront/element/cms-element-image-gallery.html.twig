@@ -4,9 +4,9 @@
     {% set product = page.product %}
 
     {% block element_image_gallery_inner_wrapper_before %}
-        {% if config('SschreierBadgeNavigationProductDetailPage.config.ShowDiscountBadgeOnProductDetailPage') or config('SschreierBadgeNavigationProductDetailPage.config.ShowTopsellerBadgeOnProductDetailPage') or config('SschreierBadgeNavigationProductDetailPage.config.ShowNewBadgeOnProductDetailPage') or config('SschreierBadgeNavigationProductDetailPage.config.ShowBadgeOnProductDetailPage') %}<div class="product-badges-detail">{% endif %}
+        {% if config('SschreierProductBadge.config.discountBadgeOnProductPage') or config('SschreierProductBadge.config.topSellerBadgeOnProductPage') or config('SschreierProductBadge.config.newBadgeOnProductPage') or config('SschreierProductBadge.config.customBadgeOnProductPage') %}<div class="product-badges-detail">{% endif %}
             {% block element_image_gallery_inner_wrapper_component_product_badges_discount %}
-                {% if config('SschreierBadgeNavigationProductDetailPage.config.ShowDiscountBadgeOnProductDetailPage') %}
+                {% if config('SschreierProductBadge.config.discountBadgeOnProductPage') %}
                     {% set price = product.calculatedPrice %}
                     {% if product.calculatedPrices.count > 0 %}
                         {% set price = product.calculatedPrices.last %}
@@ -24,7 +24,7 @@
             {% endblock %}
 
             {% block element_image_gallery_inner_wrapper_component_product_badges_topseller %}
-                {% if config('SschreierBadgeNavigationProductDetailPage.config.ShowTopsellerBadgeOnProductDetailPage') %}
+                {% if config('SschreierProductBadge.config.topSellerBadgeOnProductPage') %}
                     {% if product.markAsTopseller %}
                         <div>
                             <span class="badge badge-warning badge-topseller">{{ "listing.boxLabelTopseller"|trans|sw_sanitize }}</span>
@@ -34,7 +34,7 @@
             {% endblock %}
 
             {% block element_image_gallery_inner_wrapper_component_product_badges_new %}
-                {% if config('SschreierBadgeNavigationProductDetailPage.config.ShowNewBadgeOnProductDetailPage') %}
+                {% if config('SschreierProductBadge.config.newBadgeOnProductPage') %}
                     {% if product.isNew %}
                         <div>
                             <span class="badge badge-success badge-new">{{ "listing.boxLabelNew"|trans|sw_sanitize }}</span>
@@ -43,12 +43,19 @@
                 {% endif %}
             {% endblock %}
 
+            {% block element_image_gallery_inner_wrapper_component_product_badges_out_of_stock %}
+                {% set isAvailable = not product.isCloseout or (product.availableStock >= product.minPurchase) %}
+                {% if config('SschreierProductBadge.config.outOfStockBadgeOnProductPage') and not isAvailable %}
+                    {% sw_include '@SschreierProductBadge/storefront/component/product/card/badge-out-of-stock.html.twig' %}
+                {% endif %}
+            {% endblock %}
+
             {% set extension = product.extensions %}
             {% set customFields = product.translated.customFields %}
             {% set numberBadgesValue = extension['numberBadgesValue'].value %}
 
             {% block element_image_gallery_inner_wrapper_custom_badge %}
-                {% if config('SschreierBadgeNavigationProductDetailPage.config.ShowBadgeOnProductDetailPage') %}
+                {% if config('SschreierProductBadge.config.customBadgeOnProductPage') %}
                     {% for numberBadges in 1..numberBadgesValue %}
                         {% set customBadgeTextValue = 'sschreier_badges_badge' ~ numberBadges ~ '_text' %}
                         {% set customBadgeBackgroundColorValue = 'sschreier_badges_badge' ~ numberBadges ~ '_backgroundcolor' %}
@@ -56,13 +63,13 @@
 
                         {% block page_product_detail_buy_container_inner %}
                             {% if customFields[customBadgeTextValue] %}
-                                {% sw_include '@SschreierBadgeNavigationProductDetailPage/storefront/component/product/card/badge-custom.html.twig' %}
+                                {% sw_include '@SschreierProductBadge/storefront/component/product/card/badge-custom.html.twig' %}
                             {% endif %}
                         {% endblock %}
                     {% endfor %}
                 {% endif %}
             {% endblock %}
-    {% if config('SschreierBadgeNavigationProductDetailPage.config.ShowDiscountBadgeOnProductDetailPage') or config('SschreierBadgeNavigationProductDetailPage.config.ShowTopsellerBadgeOnProductDetailPage') or config('SschreierBadgeNavigationProductDetailPage.config.ShowNewBadgeOnProductDetailPage') or config('SschreierBadgeNavigationProductDetailPage.config.ShowBadgeOnProductDetailPage') %}</div>{% endif %}
+    {% if config('SschreierProductBadge.config.discountBadgeOnProductPage') or config('SschreierProductBadge.config.topSellerBadgeOnProductPage') or config('SschreierProductBadge.config.newBadgeOnProductPage') or config('SschreierProductBadge.config.customBadgeOnProductPage') %}</div>{% endif %}
     {% endblock %}
 
     {{ parent() }}
