@@ -14,7 +14,7 @@
         "shopware/storefront": "~6.4.1"
     },
     "extra": {
-        "shopware-plugin-class": "Sschreier\\BadgeNavigationProductDetailPage\\SschreierBadgeNavigationProductDetailPage",
+        "shopware-plugin-class": "Sschreier\\ProductBadge\\SschreierProductBadge",
         "plugin-icon": "src/Resources/config/plugin.png",
         "copyright": "Sebastian Schreier",
         "label": {
@@ -36,7 +36,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Sschreier\\BadgeNavigationProductDetailPage\\": "src/"
+            "Sschreier\\ProductBadge\\": "src/"
         }
     }
 }

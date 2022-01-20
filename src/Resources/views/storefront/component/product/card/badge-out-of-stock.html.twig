@@ -1,0 +1,5 @@
+<div>
+    <span class="badge {% if not config('SschreierProductBadge.config.outOfStockBadgeColorViaConfig') %}badge-light badge-sold-out{% endif %}" {% if config('SschreierProductBadge.config.outOfStockBadgeColorViaConfig') %}{% if config('SschreierProductBadge.config.outOfStockBadgeBackgroundColor') or config('SschreierProductBadge.config.outOfStockBadgeFontColor') %}style="{% if config('SschreierProductBadge.config.outOfStockBadgeBackgroundColor') %}background-color: {{ config('SschreierProductBadge.config.outOfStockBadgeBackgroundColor') }};{% endif %}{% if config('SschreierProductBadge.config.outOfStockBadgeFontColor') %}color: {{ config('SschreierProductBadge.config.outOfStockBadgeFontColor') }};{% endif %}"{% endif %}{% endif %}>
+        {{ "sschreier.badgesoldout"|trans|sw_sanitize }}
+    </span>
+</div>

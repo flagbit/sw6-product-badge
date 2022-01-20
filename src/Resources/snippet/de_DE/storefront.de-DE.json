@@ -3,6 +3,7 @@
         "badgenavigationproductdetailpage": {
             "badgeText": "%badgetext%",
             "boxLabelDiscount": "&#37;"
-        }
+        },
+        "badgesoldout" : "Ausverkauft"
     }
 }

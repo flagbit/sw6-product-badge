@@ -14,3 +14,10 @@
         letter-spacing: 0;
     }
 }
+
+.product-badges,
+.product-badges-detail {
+    .badge-sold-out {
+        color: $sw-text-color;
+    }
+}
